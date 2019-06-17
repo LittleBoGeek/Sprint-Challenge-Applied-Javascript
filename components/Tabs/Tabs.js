@@ -7,7 +7,7 @@ class TabLink {
     // Get the `data-tab` value from this.tabElement and store it here
     this.tabData  = this.tabElement.dataset.tab;
     //console.log(this.tabData);
-    //this.cord = document.querySelector
+    
 
   // Check to see if this.tabData is equal to 'all'
 
@@ -15,14 +15,14 @@ class TabLink {
       // If `all` is true, select all cards regardless of their data attribute values
       this.cards = document.querySelectorAll('.card');
       
-     } else {
+     } else if (`${this.tabData}` === `${this.cardData}`){
       // else if `all` is false, only select the cards with matching this.tabData values
-   this.cards = document.querySelector    
+   this.cards = this.cardElement; 
    
     }
   
   //  Map over the newly converted NodeList we just created in our if statement above. Convert each this.cards element into a new instance of the TabCard class. Pass in a card object to the TabCard class. 
-     //Array.from(this.cards).map( card => new TabCard(card));
+     Array.from(this.cards).map( card => new TabCard(card));
 
 
     // Add a click event that invokes this.selectTab
@@ -42,9 +42,7 @@ class TabLink {
 
     // Select all of the elements with the .card class on them
     const cards = document.querySelectorAll('.card')
-    Array.from(cards)
-    console.log(cards);    
-
+   
     // Iterate through the NodeList setting the display style each one to 'none'
      cards.forEach( tab => tab.style.display="none");
      
@@ -53,14 +51,15 @@ class TabLink {
      this.tabElement.classList.add('active-tab')
   
     // Notice we are looping through the this.cards array and invoking selectCard() from the TabCard class. Just un-comment the code and study what is happening here.
-  //   this.cards.forEach(card => card.selectCard());
+    this.cards.forEach(card => card.selectCard());
   }
 }  
+console.log(this.cardData);
 class TabCard {
   constructor(cardElement){
     // Assign this.cardElement to the cardElement DOM reference
      this.cardElement = cardElement;
-     
+     this.cardData = this.cardElement.dataset.tab;
      
   }
   selectCard(){
@@ -80,5 +79,5 @@ let cards = document.querySelectorAll('.card').forEach( card => new TabCard(card
 - In your .forEach() method's callback function, return a new instance of TabLink and pass in each tab as a parameter
 
 */
-// grabbing elements with class . tab and iterating over them, to return a new instance of tabLink
+// grabbing elements with class .tab and iterating over them, to return a new instance of tabLink
  let tabs = document.querySelectorAll(".tab").forEach( tab => new TabLink(tab));
